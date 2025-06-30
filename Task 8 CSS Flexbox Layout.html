@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+        header{border: 1px blanchedalmond;
+        background-color: aqua;}
+        aside{background-color: antiquewhite;}
+        section{background-color: blanchedalmond;}
+        Body{
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        Header, footer{
+        
+            background-color: bisque;
+            color: black;
+            padding: 1rem;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        main {
+      flex: 1;
+      display: flex;
+      padding: 1rem;
+      gap: 1rem;
+      background-color: #84979b;
+    }
+
+    .sidebar {
+      background-color: #80c2ee;
+      padding: 1px;
+      width: 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .content {
+      background-color: white;
+      padding: 1rem;
+      flex: 1; 
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    </style>
+</head>
+<body>
+    <header>Header</header>
+    <main Class="Container">
+        <aside Class="Sidebar">
+            <h1>Sidebar</h1>
+            <p>This Is A Sidebar</p>
+        </aside>
+        <section Class="content">Content</section> 
+    </main>
+</body>
+</html>
