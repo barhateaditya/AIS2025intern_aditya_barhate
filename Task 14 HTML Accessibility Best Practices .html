@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessible Photo Gallery with Lightbox</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 10px;
+            background: #000;
+            color: #fff;
+            padding: 8px;
+            z-index: 1000;
+        }
+
+        .skip-link:focus {
+            top: 10px;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        figure {
+            margin: 0;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        figure:focus-within,
+        figure:hover {
+            transform: scale(1.05);
+            outline: 2px solid #007bff;
+        }
+
+        img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        figcaption {
+            text-align: center;
+            padding: 10px 0;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 80%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .lightbox img {
+            max-width: 100%;
+            max-height: 70vh;
+            border-radius: 8px;
+        }
+
+        .lightbox figcaption {
+            color: white;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        .close:focus {
+            outline: 2px solid #fff;
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <main id="main-content">
+        <h1>Photo Gallery</h1>
+        <div class="gallery" role="region" aria-label="Photo gallery">
+            <figure tabindex="0" role="button" aria-label="Open Scenic Mountain View in lightbox">
+                <img src="https://picsum.photos/800/600?random=1" alt="A majestic mountain range under a clear blue sky">
+                <figcaption>Scenic Mountain View</figcaption>
+            </figure>
+            <figure tabindex="0" role="button" aria-label="Open Calm Lake at Sunset in lightbox">
+                <img src="https://picsum.photos/800/600?random=2" alt="A serene lake reflecting a colorful sunset">
+                <figcaption>Calm Lake at Sunset</figcaption>
+            </figure>
+            <figure tabindex="0" role="button" aria-label="Open Path Through the Forest in lightbox">
+                <img src="https://picsum.photos/800/600?random=3" alt="A winding path through a dense green forest">
+                <figcaption>Path Through the Forest</figcaption>
+            </figure>
+            <figure tabindex="0" role="button" aria-label="Open City Skyline at Night in lightbox">
+                <img src="https://picsum.photos/800/600?random=4" alt="A city skyline illuminated with lights at night">
+                <figcaption>City Skyline at Night</figcaption>
+            </figure>
+        </div>
+    </main>
+
+    <div class="lightbox" role="dialog" aria-label="Image lightbox">
+        <button class="close" aria-label="Close lightbox">×</button>
+        <div class="lightbox-content">
+            <img src="" alt="">
+            <figcaption></figcaption>
+        </div>
+    </div>
+
+    <script>
+        const images = document.querySelectorAll('.gallery figure');
+        const lightbox = document.querySelector('.lightbox');
+        const lightboxImg = document.querySelector('.lightbox img');
+        const lightboxCaption = document.querySelector('.lightbox figcaption');
+        const closeBtn = document.querySelector('.close');
+
+        images.forEach(figure => {
+            figure.addEventListener('click', () => openLightbox(figure));
+            figure.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openLightbox(figure);
+                }
+            });
+        });
+
+        function openLightbox(figure) {
+            const img = figure.querySelector('img');
+            const caption = figure.querySelector('figcaption');
+            lightboxImg.src = img.src;
+            lightboxImg.alt = img.alt;
+            lightboxCaption.textContent = caption.textContent;
+            lightbox.style.display = 'flex';
+            closeBtn.focus();
+        }
+
+        closeBtn.addEventListener('click', () => closeLightbox());
+        closeBtn.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                closeLightbox();
+            }
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.style.display === 'flex') {
+                closeLightbox();
+            }
+        });
+
+        function closeLightbox() {
+            lightbox.style.display = 'none';
+            images[0].focus(); // Return focus to first image
+        }
+    </script>
+</body>
+</html>

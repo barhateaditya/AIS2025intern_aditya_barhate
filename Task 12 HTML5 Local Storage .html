@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>To-Do List with Local Storage</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      padding: 2em;
+    }
+    h1 {
+      text-align: center;
+    }
+    #todo-form {
+      display: flex;
+      justify-content: center;
+      gap: 0.5em;
+      margin-bottom: 1em;
+    }
+    #task-input {
+      width: 250px;
+      padding: 0.5em;
+    }
+    #task-list {
+      list-style: none;
+      padding: 0;
+      max-width: 400px;
+      margin: auto;
+    }
+    .task {
+      background-color: white;
+      margin: 0.5em 0;
+      padding: 0.5em;
+      display: flex;
+      justify-content: space-between;
+      border: 1px solid #ddd;
+    }
+    button {
+      margin-left: 0.5em;
+    }
+  </style>
+</head>
+<body>
+  <h1>To-Do List</h1>
+
+  <form id="todo-form">
+    <input type="text" id="task-input" placeholder="Enter a new task..." required />
+    <button type="submit">Add</button>
+  </form>
+
+  <ul id="task-list"></ul>
+
+  <script>
+    const form = document.getElementById("todo-form");
+    const input = document.getElementById("task-input");
+    const list = document.getElementById("task-list");
+
+    // Load tasks from localStorage
+    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+    // Save tasks to localStorage
+    function saveTasks() {
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+    }
+
+    // Render tasks
+    function renderTasks() {
+      list.innerHTML = "";
+      tasks.forEach((task, index) => {
+        const li = document.createElement("li");
+        li.className = "task";
+        li.innerHTML = `
+          <span>${task}</span>
+          <div>
+            <button onclick="editTask(${index})">Edit</button>
+            <button onclick="deleteTask(${index})">Delete</button>
+          </div>
+        `;
+        list.appendChild(li);
+      });
+    }
+
+    // Add new task
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const task = input.value.trim();
+      if (task !== "") {
+        tasks.push(task);
+        saveTasks();
+        renderTasks();
+        input.value = "";
+      }
+    });
+
+    // Delete task
+    window.deleteTask = function(index) {
+      if (confirm("Delete this task?")) {
+        tasks.splice(index, 1);
+        saveTasks();
+        renderTasks();
+      }
+    };
+
+    // Edit task
+    window.editTask = function(index) {
+      const newTask = prompt("Edit your task:", tasks[index]);
+      if (newTask !== null && newTask.trim() !== "") {
+        tasks[index] = newTask.trim();
+        saveTasks();
+        renderTasks();
+      }
+    };
+
+    // Initial render
+    renderTasks();
+  </script>
+</body>
+</html>
