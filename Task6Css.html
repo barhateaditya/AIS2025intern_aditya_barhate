@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Handling Example</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      background-color: #f0f4f8;
+    }
+    #actionBtn {
+      padding: 15px 30px;
+      font-size: 18px;
+      background-color: #0078D7;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    #actionBtn:hover {
+      background-color: #005a9e;
+    }
+    #actionBtn:focus {
+      outline: 2px dashed #000;
+      outline-offset: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <button id="actionBtn" aria-label="Click or hover me for action">Click or Hover Me</button>
+
+  <script>
+    const btn = document.getElementById("actionBtn");
+
+    // 👆 Click Event
+    btn.addEventListener("click", () => {
+      alert("You clicked the button!");
+    });
+
+    // 🖱️ Mouseover Event
+    btn.addEventListener("mouseover", () => {
+      btn.textContent = "You're hovering!";
+    });
+
+    // 🧹 Mouseout to reset text
+    btn.addEventListener("mouseout", () => {
+      btn.textContent = "Click or Hover Me";
+    });
+
+    // ⌨️ Keyboard Accessibility (Enter/Space)
+    btn.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault(); // Prevent scrolling on Space
+        btn.click();
+      }
+    });
+  </script>
+
+</body>
+</html>
