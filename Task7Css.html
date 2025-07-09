@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DOM Manipulation Example</title>
+  <style>
+    .highlight {
+      background-color: rgb(138, 231, 119);
+      font-weight: bold;
+      padding: 5px;
+      border-radius: 4px;
+    }
+
+    #content {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 6px;
+      border: none;
+      background-color: #4da4de;
+      color: white;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #ce1364;
+    }
+  </style>
+</head>
+<body>
+
+  <p id="content">Hello!</p>
+  <button id="toggleHighlightBtn">Toggle Highlight</button>
+  <button id="changeTextBtn">Change Text</button>
+
+  <script>
+    const content = document.querySelector('#content');
+    const toggleBtn = document.querySelector('#toggleHighlightBtn');
+    const changeTextBtn = document.querySelector('#changeTextBtn');
+
+    toggleBtn.addEventListener('click', () => {
+      content.classList.toggle('highlight');
+    });
+
+    changeTextBtn.addEventListener('click', () => {
+      content.textContent = 'Goodbye!';
+    });
+  </script>
+
+</body>
+</html>
