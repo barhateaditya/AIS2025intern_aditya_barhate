@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lightbox Gallery</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    figure {
+      margin: 0;
+      width: 180px;
+      cursor: pointer;
+    }
+
+    figure img {
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+      transition: transform 0.3s ease;
+    }
+
+    figure:hover img {
+      transform: scale(1.05);
+    }
+
+    figcaption {
+      text-align: center;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    /* Lightbox overlay */
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 90%;
+      text-align: center;
+    }
+
+    .lightbox-content img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 6px;
+    }
+
+    .lightbox-caption {
+      color: white;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      color: white;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Lightbox Gallery</h2>
+
+  <div class="gallery">
+    <figure data-full="https://via.placeholder.com/800x500?text=Image+1">
+      <img src="Sunset over green hills with a winding river.jpeg" alt="Image 1">
+      <figcaption>Sunset</figcaption>
+    </figure>
+    <figure data-full="https://via.placeholder.com/800x500?text=Image+2">
+      <img src="IMG-20250615-WA0020.jpg" alt="Image 2">
+      <figcaption>Tamhini</figcaption>
+    </figure>
+    <figure data-full="https://via.placeholder.com/800x500?text=Image+3">
+      <img src="IMG-20250616-WA0153.jpg" alt="Image 3">
+      <figcaption>Nature</figcaption>
+    </figure>
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightboxClose">&times;</button>
+      <img id="lightboxImage" src="" alt="Expanded image">
+      <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+  </div>
+
+  <script>
+    const figures = document.querySelectorAll('figure');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImage');
+    const lightboxCaption = document.getElementById('lightboxCaption');
+    const lightboxClose = document.getElementById('lightboxClose');
+
+    figures.forEach(figure => {
+      figure.addEventListener('click', () => {
+        const fullImg = figure.getAttribute('data-full');
+        const caption = figure.querySelector('figcaption').innerText;
+
+        lightboxImg.src = fullImg;
+        lightboxCaption.textContent = caption;
+        lightbox.classList.add('active');
+      });
+    });
+
+    // Close lightbox
+    lightboxClose.addEventListener('click', () => {
+      lightbox.classList.remove('active');
+    });
+
+    // Click outside image to close
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        lightbox.classList.remove('active');
+      }
+    });
+  </script>
+
+</body>
+</html>
