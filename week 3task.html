@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internship Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+        }
+
+        header {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        nav {
+            background: #34495e;
+            padding: 1rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #3498db;
+        }
+
+        .section {
+            padding: 3rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about, .contact {
+            background: #f9f9f9;
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-card h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .skill {
+            background: #3498db;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .contact p {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Aditya Barhate</h1>
+        <p>Intern | Aspiring Professional</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="about" class="section about">
+        <h2>About Me</h2>
+        <p>I'm a dedicated student/intern with a passion for [wed developmnt]. During my internships, I've gained hands-on experience in [specific skills or technologies]. I’m eager to contribute my skills to innovative projects and grow as a professional.</p>
+    </section>
+
+    <section id="projects" class="section projects">
+        <h2>Internship Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <h3>Project 1: [Week 1 task]</h3>
+                <p>Portfolio website with semantic HTML, responsive Flexbox, accessible forms, tables, multimedia, geolocation, canvas drawing, to-do list with local storage, and lightbox gallery, optimized for accessibility and device adaptability.</p>
+            </div>
+            <div class="project-card">
+                <h3>Project 2: [Week 2 task]</h3>
+                <p>Style with CSS; use box model, positioning. Day 2: 3x3 Grid gallery; hover effects, transitions. Day 3: JS DOM text, buttons; event handling. Day 4: DOM manipulation; form validation. Day 5: Canvas drawing; to-do list with localStorage. Day 6: Fetch API data; reusable modal. Day 7: Lightbox gallery; theme toggle with CSS variables.</p>
+            </div>
+            <div class="project-card">
+                <h3>Project 3: [Week 3 task]</h3>
+                <p>Style with CSS; use box model, positioning. Day 2: 3x3 Grid gallery; hover effects, transitions. Day 3: JS DOM text, buttons; event handling. Day 4: DOM manipulation; form validation. Day 5: Canvas drawing; to-do list with localStorage. Day 6: Fetch API data; reusable modal. Day 7: Lightbox gallery; theme toggle with CSS variables.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="section skills">
+        <h2>Skills</h2>
+        <div class="skills-list">
+            <span class="skill">HTML</span>
+            <span class="skill">CSS</span>
+            <span class="skill">JavaScript</span>
+            <span class="skill">Git</span>
+        </div>
+    </section>
+
+    <section id="contact" class="section contact">
+        <h2>Contact</h2>
+        <p>Email: adityabarhate@example.com</p>
+        <p>LinkedIn: linkedin.com/in/adityabarhate</p>
+        <p>GitHub: github.com/adityabarhate</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 adityabarhate. All rights reserved.</p>
+    </footer>
+</body>
+</html>
